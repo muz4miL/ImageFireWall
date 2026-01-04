@@ -69,45 +69,46 @@ export function ResultViewer({ status }: ResultViewerProps) {
             <motion.div
               className="absolute inset-0 rounded-full"
               style={{
-                background: "conic-gradient(from 0deg, transparent, rgba(59, 130, 246, 0.3), transparent, rgba(6, 182, 212, 0.3), transparent)",
+                background:
+                  "conic-gradient(from 0deg, transparent, rgba(59, 130, 246, 0.3), transparent, rgba(6, 182, 212, 0.3), transparent)",
               }}
               animate={{ rotate: 360 }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
             />
-            
+
             {/* Pulse rings */}
             <span className="absolute inset-1 rounded-full border border-blue-400/30 animate-ping dark:border-cyan-400/40" />
             <span className="absolute inset-3 rounded-full border border-blue-300/20 animate-ping [animation-delay:300ms] dark:border-cyan-500/30" />
-            
+
             {/* Inner glowing ring */}
             <motion.div
               className="absolute inset-4 rounded-full border-2 border-blue-400/40 dark:border-cyan-500/50"
-              animate={{ 
+              animate={{
                 boxShadow: [
                   "0 0 0 0 rgba(59, 130, 246, 0.2)",
                   "0 0 20px 4px rgba(59, 130, 246, 0.15)",
-                  "0 0 0 0 rgba(59, 130, 246, 0.2)"
-                ]
+                  "0 0 0 0 rgba(59, 130, 246, 0.2)",
+                ],
               }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               style={{
-                boxShadow: "inset 0 0 20px rgba(59, 130, 246, 0.1)"
+                boxShadow: "inset 0 0 20px rgba(59, 130, 246, 0.1)",
               }}
             />
-            
+
             {/* Center container with icon */}
             <div className="relative h-20 w-20 rounded-full bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/80 backdrop-blur-sm flex items-center justify-center shadow-lg dark:from-slate-900 dark:to-black dark:border-cyan-800/60 dark:shadow-[0_0_30px_rgba(6,182,212,0.25)]">
               {/* Inner glow effect */}
               <div className="absolute inset-2 rounded-full bg-gradient-to-br from-blue-50/50 to-transparent dark:from-cyan-900/20 dark:to-transparent" />
-              
+
               <motion.div
                 animate={{
                   scale: [1, 1.08, 1],
                   filter: [
                     "drop-shadow(0 0 0px rgba(59, 130, 246, 0))",
                     "drop-shadow(0 0 8px rgba(59, 130, 246, 0.4))",
-                    "drop-shadow(0 0 0px rgba(59, 130, 246, 0))"
-                  ]
+                    "drop-shadow(0 0 0px rgba(59, 130, 246, 0))",
+                  ],
                 }}
                 transition={{
                   duration: 2.5,
