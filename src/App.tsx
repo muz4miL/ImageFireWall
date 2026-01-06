@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import {
   Moon,
   Sun,
-  Shield,
   FolderPlus,
   FolderClock,
   ScrollText,
   Users,
-  User,
 } from "lucide-react";
 import { TrustDashboard } from "./components/dashboard/TrustDashboard";
+import appLogo from "./assets/logo.png";
+import profilePhoto from "./assets/profile.jpg";
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -27,13 +27,16 @@ export default function App() {
         {/* Sidebar */}
         <aside className="fixed left-0 top-0 h-screen w-60 border-r border-slate-200 bg-white/70 backdrop-blur-xl shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:backdrop-blur-none flex flex-col z-20">
           {/* Logo */}
-          <div className="flex items-center gap-3 px-6 py-5 border-b border-slate-200 dark:border-slate-800">
-            <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 dark:from-cyan-500 dark:to-cyan-600 shadow-md">
-              <Shield className="w-5 h-5 text-white" />
-            </div>
+          <div className="flex items-center gap-4 px-6 py-5 border-b border-slate-200 dark:border-slate-800">
+            <img
+              src={appLogo}
+              alt="Axiom Forensics"
+              className="h-14 w-14 object-contain drop-shadow-md dark:drop-shadow-[0_0_18px_rgba(6,182,212,0.28)]"
+              draggable={false}
+            />
             <div>
               <h1 className="text-sm font-bold tracking-tight text-slate-900 dark:text-slate-100">
-                Project Aegis
+                Axiom Forensics
               </h1>
               <p className="text-xs text-slate-500 dark:text-slate-400">
                 Medical Firewall
@@ -67,8 +70,13 @@ export default function App() {
           {/* User Profile */}
           <div className="px-3 py-4 border-t border-slate-200 dark:border-slate-800">
             <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all cursor-pointer">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 dark:from-cyan-500 dark:to-cyan-600 text-white text-sm font-semibold shadow-sm">
-                <User size={16} />
+              <div className="w-12 h-12 rounded-full border-2 border-slate-100 bg-white shadow-sm overflow-hidden flex items-center justify-center dark:border-slate-700 dark:bg-slate-900">
+                <img
+                  src={profilePhoto}
+                  alt="Dr. Shiraz"
+                  className="w-full h-full object-contain p-1"
+                  draggable={false}
+                />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-slate-900 dark:text-slate-100 truncate">

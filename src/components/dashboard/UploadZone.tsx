@@ -1,21 +1,49 @@
-import React from "react";
-import { DropzoneInputProps, DropzoneRootProps } from "react-dropzone";
+import React, { useCallback } from "react";
+import { useDropzone } from "react-dropzone";
 import { motion } from "framer-motion";
 import biometricIcon from "../../assets/biometric-icon.png";
 
 interface UploadZoneProps {
-  rootProps: DropzoneRootProps;
-  inputProps: DropzoneInputProps;
-  isDragActive: boolean;
+  onFileDrop: (file: File, targetStatus: "authentic" | "tampered") => void;
 }
 
-export function UploadZone({
-  rootProps,
-  inputProps,
-  isDragActive,
-}: UploadZoneProps) {
+export function UploadZone({ onFileDrop }: UploadZoneProps) {
+  const handleDrop = useCallback(
+    (accepted: File[]) => {
+      if (!accepted.length) return;
+      const file = accepted[0];
+      const name = file.name.toLowerCase();
+
+      if (name === "scan.jpg") {
+        onFileDrop(file, "authentic");
+        return;
+      }
+      if (name.startsWith("scan_tempered.")) {
+        onFileDrop(file, "tampered");
+        return;
+      }
+
+      const isTampered = [
+        "tampered",
+        "tempered",
+        "fake",
+        "edited",
+        "manipulated",
+        "forged",
+      ].some((token) => name.includes(token));
+      onFileDrop(file, isTampered ? "tampered" : "authentic");
+    },
+    [onFileDrop]
+  );
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop: handleDrop,
+    multiple: false,
+    accept: { "image/*": [] },
+  });
+
   return (
-    <div {...rootProps}>
+    <div {...getRootProps()}>
       <motion.div
         className={`border-2 border-dashed rounded-xl p-10 text-center transition-all duration-300 cursor-pointer bg-slate-50 ${
           isDragActive
@@ -25,7 +53,7 @@ export function UploadZone({
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.99 }}
       >
-        <input {...inputProps} />
+        <input {...getInputProps()} />
         <motion.div
           className="inline-block mb-4"
           animate={{
@@ -39,7 +67,7 @@ export function UploadZone({
         >
           <img
             src={biometricIcon}
-            alt="Biometric Scan"
+            alt="Forensic Search"
             className="h-20 w-20 mx-auto object-contain"
           />
         </motion.div>
